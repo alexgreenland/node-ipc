@@ -1,7 +1,7 @@
 'use strict';
 
-const net = require('net'),
-    tls = require('tls'),
+let net = require('net')
+const tls = require('tls'),
     EventParser = require('../entities/EventParser.js'),
     Message = require('js-message'),
     fs = require('fs'),
@@ -17,6 +17,11 @@ let eventParser = new EventParser();
 class Client extends Events{
     constructor(config,log){
         super();
+
+        if (config.netModule) {
+            net = config.netModule
+        }
+
         Object.assign(
             this,
             {
